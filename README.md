@@ -9,7 +9,7 @@
 - in app.module.ts
 
 ``` javascript
-import { CalendarModule } from 'ionic3-calendar';
+import { CalendarModule } from 'ionic3-calendar-th';
 
   @NgModule({
     ...
