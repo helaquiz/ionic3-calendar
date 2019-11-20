@@ -1,6 +1,6 @@
 # ionic3-calendar
 
-![image](https://github.com/helaquiz/ionic3-calendar/blob/master/index.png?raw=true)"
+![image](https://github.com/helaquiz/ionic3-calendar/blob/master/index.jpg?raw=true)"
 
 ## Using
 
