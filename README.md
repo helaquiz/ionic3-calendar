@@ -1,6 +1,6 @@
 # ionic3-calendar
 
-![image](https://github.com/laker007/ionic3-calendar/blob/master/calendar.png?raw=true)"
+![image](https://github.com/helaquiz/ionic3-calendar/blob/master/index.png?raw=true)"
 
 ## Using
 
@@ -25,6 +25,11 @@ import { CalendarModule } from 'ionic3-calendar';
 
   `<ion-calendar #calendar></ion-calendar>`
 
+- Send "lang" for disaplay TH-EN 
+
+  `<ion-calendar #calendar lang="TH"></ion-calendar>`
+  `<ion-calendar #calendar lang="EN"></ion-calendar>`
+
 - Go Today
 
   `<button ion-button clear (click)="calendar.today()">Today</button>`
@@ -38,6 +43,12 @@ import { CalendarModule } from 'ionic3-calendar';
   Restart Ionic Serve
 
 ## Update
+
+- 20th November 2019
+
+  Update README FILE.
+
+  Fork for TH-EN Support
 
 - 31st July 2017
 
