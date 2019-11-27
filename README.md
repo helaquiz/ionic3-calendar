@@ -5,7 +5,7 @@
 
 ## Using
 
-- npm install ionic3-calendar --save (in ionic project folder)
+- npm install ionic3-calendar-th --save (in ionic project folder)
   
 - Add `CalendarModule` module in app.module.ts
 
