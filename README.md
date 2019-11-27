@@ -6,7 +6,8 @@
 ## Using
 
 - npm install ionic3-calendar --save (in ionic project folder)
-- in app.module.ts
+  
+- Add `CalendarModule` module in app.module.ts
 
 ``` javascript
 import { CalendarModule } from 'ionic3-calendar-th';
@@ -26,10 +27,17 @@ import { CalendarModule } from 'ionic3-calendar-th';
 
   `<ion-calendar #calendar></ion-calendar>`
 
-- Send "lang" for disaplay TH-EN 
+- Send "lang" for disaplay TH
 
   `<ion-calendar #calendar lang="TH"></ion-calendar>`
+  
+- Send "lang" for disaplay EN 
+
   `<ion-calendar #calendar lang="EN"></ion-calendar>`
+
+- Disable Less Today Click 
+
+  `<ion-calendar #calendar [isDisableLessToday]="true | false"></ion-calendar>`
 
 - Go Today
 
@@ -44,6 +52,10 @@ import { CalendarModule } from 'ionic3-calendar-th';
   Restart Ionic Serve
 
 ## Update
+
+- (1.0.2) 27th November 2019
+
+  Update Disable "Less Today" Click
 
 - 20th November 2019
 

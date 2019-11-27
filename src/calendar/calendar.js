@@ -15,6 +15,7 @@ var Calendar = /** @class */ (function () {
     function Calendar() {
         this.onDaySelect = new EventEmitter();
         this.lang = 'TH';
+        this.isDisableLessToday = false;
         this.dateArray = []; // 本月展示的所有天的数组
         this.weekArray = []; // 保存日历每行的数组
         this.lastSelect = 0; // 记录上次点击的位置
@@ -106,17 +107,21 @@ var Calendar = /** @class */ (function () {
                 }
             }
         }
+        var isLessMonth = new Date(this.displayYear + "-" + (this.displayMonth + 1)) < new Date(this.currentYear + "-" + (this.currentMonth + 1));
+        var isGreaterMonth = new Date(this.displayYear + "-" + (this.displayMonth + 1)) > new Date(this.currentYear + "-" + (this.currentMonth + 1));
         // 将本月天数添加到数组中
         // Add the number of days of the month to the array
         for (var i = 0; i < monthDays; i++) {
-            this.dateArray.push({
+            var dateObj = {
                 year: year,
                 month: month,
                 date: i + 1,
                 isThisMonth: true,
                 isToday: false,
                 isSelect: false,
-            });
+                isLessToday: (isLessMonth ? true : isGreaterMonth ? false : (i + 1 < this.currentDate) ? true : false) && this.isDisableLessToday
+            };
+            this.dateArray.push(dateObj);
         }
         if (this.currentYear === year && this.currentMonth === month) {
             var todayIndex = _.findIndex(this.dateArray, {
@@ -237,10 +242,14 @@ var Calendar = /** @class */ (function () {
         Input(),
         __metadata("design:type", String)
     ], Calendar.prototype, "lang", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], Calendar.prototype, "isDisableLessToday", void 0);
     Calendar = __decorate([
         Component({
             selector: 'ion-calendar',
-            template: "\n    <ion-grid>\n        <ion-row justify-content-center>\n            <ion-col col-auto (click)=\"back()\">\n                <ion-icon ios=\"ios-arrow-back\" md=\"md-arrow-back\"></ion-icon>\n            </ion-col>\n            <ion-col col-auto>\n                <!-- <div>{{displayMonth + 1}} {{displayYear}}</div> -->\n                <div>{{displayMonthText}} {{displayYearText}}</div>\n            </ion-col>\n            <ion-col col-auto (click)=\"forward()\">\n                <ion-icon ios=\"ios-arrow-forward\" md=\"md-arrow-forward\"></ion-icon>\n            </ion-col>\n        </ion-row>\n\n        <ion-row>\n            <ion-col class=\"center calendar-header-col\" *ngFor=\"let head of weekHead\">{{head}}</ion-col>\n        </ion-row>\n\n        <ion-row class=\"calendar-row\" *ngFor=\"let week of weekArray;let i = index\">\n            <ion-col class=\"center calendar-col\" (click)=\"daySelect(day,i,j)\" \n            *ngFor=\"let day of week;let j = index\" \n            [ngClass]=\"[day.isThisMonth?'this-month':'not-this-month',day.isToday?'today':'',day.isSelect?'select':'']\">\n                {{day.date}}\n            </ion-col>\n        </ion-row>\n\n    </ion-grid>\n"
+            template: "\n    <ion-grid>\n        <ion-row justify-content-center>\n            <ion-col col-auto (click)=\"back()\">\n                <ion-icon ios=\"ios-arrow-back\" md=\"md-arrow-back\"></ion-icon>\n            </ion-col>\n            <ion-col col-auto>\n                <div>{{displayMonthText}} {{displayYearText}}</div>\n            </ion-col>\n            <ion-col col-auto (click)=\"forward()\">\n                <ion-icon ios=\"ios-arrow-forward\" md=\"md-arrow-forward\"></ion-icon>\n            </ion-col>\n        </ion-row>\n\n        <ion-row>\n            <ion-col class=\"center calendar-header-col\" *ngFor=\"let head of weekHead\">{{head}}</ion-col>\n        </ion-row>\n\n        <ion-row class=\"calendar-row\" *ngFor=\"let week of weekArray;let i = index\">\n            <ion-col class=\"center calendar-col\" (click)=\"daySelect(day,i,j)\" \n            *ngFor=\"let day of week;let j = index\" \n            [ngClass]=\"[day.isThisMonth?'this-month':'not-this-month',day.isToday?'today':'',day.isSelect?'select':'',day.isLessToday?'disabled-date':'']\">\n                {{day.date}}\n            </ion-col>\n        </ion-row>\n\n    </ion-grid>\n"
         }),
         __metadata("design:paramtypes", [])
     ], Calendar);

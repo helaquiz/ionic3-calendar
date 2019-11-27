@@ -25,7 +25,7 @@ import * as _ from "lodash";
         <ion-row class="calendar-row" *ngFor="let week of weekArray;let i = index">
             <ion-col class="center calendar-col" (click)="daySelect(day,i,j)" 
             *ngFor="let day of week;let j = index" 
-            [ngClass]="[day.isThisMonth?'this-month':'not-this-month',day.isToday?'today':'',day.isSelect?'select':'']">
+            [ngClass]="[day.isThisMonth?'this-month':'not-this-month',day.isToday?'today':'',day.isSelect?'select':'',day.isLessToday?'disabled-date':'']">
                 {{day.date}}
             </ion-col>
         </ion-row>
@@ -39,6 +39,8 @@ export class Calendar {
     @Output() onDaySelect = new EventEmitter<dateObj>();
 
     @Input() lang: string = 'TH';
+
+    @Input() isDisableLessToday: boolean = false;
 
     currentYear: number;
 
@@ -160,17 +162,21 @@ export class Calendar {
             }
         }
 
+        const isLessMonth = new Date(`${this.displayYear}-${this.displayMonth + 1}`) < new Date(`${this.currentYear}-${this.currentMonth + 1}`);
+        const isGreaterMonth = new Date(`${this.displayYear}-${this.displayMonth + 1}`) > new Date(`${this.currentYear}-${this.currentMonth + 1}`);
         // 将本月天数添加到数组中
         // Add the number of days of the month to the array
         for (let i = 0; i < monthDays; i++) {
-            this.dateArray.push({
+            let dateObj = {
                 year: year,
                 month: month,
                 date: i + 1,
                 isThisMonth: true,
                 isToday: false,
                 isSelect: false,
-            })
+                isLessToday: (isLessMonth ? true : isGreaterMonth ? false : (i + 1 < this.currentDate) ? true : false) && this.isDisableLessToday
+            }
+            this.dateArray.push(dateObj)
         }
 
         if (this.currentYear === year && this.currentMonth === month) {
@@ -303,4 +309,5 @@ interface dateObj {
     isToday?: boolean,
     isSelect?: boolean,
     shortMonth?: string,
+    isLessToday?: boolean
 }

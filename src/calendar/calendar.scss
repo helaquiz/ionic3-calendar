@@ -23,6 +23,7 @@ ion-calendar {
       }
     }
     .not-this-month {
+      pointer-events: none;
       color: #fff;
       background: linear-gradient(#e5e5e5, #dfdfdf);
     }
@@ -35,6 +36,10 @@ ion-calendar {
       box-shadow: none;
       color: #fff;
       background: radial-gradient(#5c7eda, #5e89ec, #5e89ec);
+    }
+    .disabled-date {
+      pointer-events: none;
+      color: #ccc;
     }
   }
 }
