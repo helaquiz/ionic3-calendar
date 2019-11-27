@@ -53,6 +53,10 @@ import { CalendarModule } from 'ionic3-calendar-th';
 
 ## Update
 
+- (1.0.3) 27th November 2019
+
+  Remove console.log()
+
 - (1.0.2) 27th November 2019
 
   Update Disable "Less Today" Click

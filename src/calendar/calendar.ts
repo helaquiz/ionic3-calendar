@@ -234,8 +234,6 @@ export class Calendar {
         if (this.lastMonthSelect == month && this.lastYearSelect == year) {
             this.dateArray[this.lastSelect].isSelect = true;
         }
-        console.log(`DateArray`, this.dateArray);
-        console.log(`weeArray`, this.weekArray);
     }
 
     back() {
@@ -271,7 +269,6 @@ export class Calendar {
         this.lastSelect = i * 7 + j;
         this.lastMonthSelect = day.month;
         this.lastYearSelect = day.year;
-        console.log(`LAST`, this.lastSelect);
         this.dateArray[i * 7 + j].isSelect = true;
         this.dateArray[i * 7 + j].shortMonth = this.getShortMonth();
         this.onDaySelect.emit(day);
