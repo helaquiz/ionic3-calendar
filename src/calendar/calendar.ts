@@ -162,8 +162,10 @@ export class Calendar {
             }
         }
 
-        const isLessMonth = new Date(`${this.displayYear}-${this.displayMonth + 1}`) < new Date(`${this.currentYear}-${this.currentMonth + 1}`);
-        const isGreaterMonth = new Date(`${this.displayYear}-${this.displayMonth + 1}`) > new Date(`${this.currentYear}-${this.currentMonth + 1}`);
+        const dpMonthCondition = Number(this.displayMonth + 1) < 10 ? "0" + (this.displayMonth + 1) :this.displayMonth + 1;
+        const crMonthCondition = Number(this.currentMonth + 1) < 10 ? "0" + (this.currentMonth + 1) :this.currentMonth + 1;
+        const isLessMonth = new Date(`${this.displayYear}-${dpMonthCondition}`) < new Date(`${this.currentYear}-${crMonthCondition}`);
+        const isGreaterMonth = new Date(`${this.displayYear}-${dpMonthCondition}`) > new Date(`${this.currentYear}-${crMonthCondition}`);
         // 将本月天数添加到数组中
         // Add the number of days of the month to the array
         for (let i = 0; i < monthDays; i++) {

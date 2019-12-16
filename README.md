@@ -53,6 +53,10 @@ import { CalendarModule } from 'ionic3-calendar-th';
 
 ## Update
 
+- (1.0.4) 16th December 2019
+
+  Fixed bug "Disable Less Today" on iOS
+
 - (1.0.3) 27th November 2019
 
   Remove console.log()

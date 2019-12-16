@@ -107,8 +107,10 @@ var Calendar = /** @class */ (function () {
                 }
             }
         }
-        var isLessMonth = new Date(this.displayYear + "-" + (this.displayMonth + 1)) < new Date(this.currentYear + "-" + (this.currentMonth + 1));
-        var isGreaterMonth = new Date(this.displayYear + "-" + (this.displayMonth + 1)) > new Date(this.currentYear + "-" + (this.currentMonth + 1));
+        var dpMonthCondition = Number(this.displayMonth + 1) < 10 ? "0" + (this.displayMonth + 1) : this.displayMonth + 1;
+        var crMonthCondition = Number(this.currentMonth + 1) < 10 ? "0" + (this.currentMonth + 1) : this.currentMonth + 1;
+        var isLessMonth = new Date(this.displayYear + "-" + dpMonthCondition) < new Date(this.currentYear + "-" + crMonthCondition);
+        var isGreaterMonth = new Date(this.displayYear + "-" + dpMonthCondition) > new Date(this.currentYear + "-" + crMonthCondition);
         // 将本月天数添加到数组中
         // Add the number of days of the month to the array
         for (var i = 0; i < monthDays; i++) {
@@ -175,8 +177,6 @@ var Calendar = /** @class */ (function () {
         if (this.lastMonthSelect == month && this.lastYearSelect == year) {
             this.dateArray[this.lastSelect].isSelect = true;
         }
-        console.log("DateArray", this.dateArray);
-        console.log("weeArray", this.weekArray);
     };
     Calendar.prototype.back = function () {
         // 处理跨年的问题
@@ -211,7 +211,6 @@ var Calendar = /** @class */ (function () {
         this.lastSelect = i * 7 + j;
         this.lastMonthSelect = day.month;
         this.lastYearSelect = day.year;
-        console.log("LAST", this.lastSelect);
         this.dateArray[i * 7 + j].isSelect = true;
         this.dateArray[i * 7 + j].shortMonth = this.getShortMonth();
         this.onDaySelect.emit(day);
